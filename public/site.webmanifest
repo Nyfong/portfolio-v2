@@ -1,0 +1,21 @@
+{
+  "name": "Your Name Portfolio",
+  "short_name": "Portfolio",
+  "description": "Portfolio of a designer and developer creating beautiful digital experiences",
+  "icons": [
+    {
+      "src": "/logo-web.png",
+      "sizes": "860x408",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

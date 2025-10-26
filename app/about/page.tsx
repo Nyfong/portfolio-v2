@@ -53,7 +53,7 @@ export default function AboutPage() {
                   Full-Stack Developer
                 </Badge>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-balance leading-tight">
-                  Hi, I'm <span className="text-primary">Ny Foong</span>
+                  Hi, I'm <span className="text-primary">Ny Fong</span>
                 </h1>
                 <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
                   A passionate full-stack developer with 2+ years of experience

@@ -3,14 +3,7 @@ import { getPostBySlug } from "@/lib/blog";
 import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  Clock,
-  ArrowLeft,
-  Share2,
-  Heart,
-  Bookmark,
-} from "lucide-react";
+import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
@@ -72,31 +65,6 @@ export default async function BlogPost({
                 Back to Blog
               </Link>
             </Button>
-
-            {/* Action Buttons */}
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950 dark:hover:text-red-400"
-              >
-                <Heart className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950 dark:hover:text-blue-400"
-              >
-                <Bookmark className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hover:bg-green-50 hover:text-green-600 dark:hover:bg-green-950 dark:hover:text-green-400"
-              >
-                <Share2 className="h-4 w-4" />
-              </Button>
-            </div>
           </div>
 
           {/* Header */}
@@ -186,23 +154,7 @@ export default async function BlogPost({
 
           {/* Footer */}
           <div className="mt-16 pt-8 border-t border-border/50">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="outline"
-                  className="hover:bg-primary/10 hover:text-primary hover:border-primary/30"
-                >
-                  <Heart className="h-4 w-4 mr-2" />
-                  Like this article
-                </Button>
-                <Button
-                  variant="outline"
-                  className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 dark:hover:bg-blue-950 dark:hover:text-blue-400"
-                >
-                  <Bookmark className="h-4 w-4 mr-2" />
-                  Save for later
-                </Button>
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Button
                 asChild
                 variant="ghost"
