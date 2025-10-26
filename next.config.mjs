@@ -1,5 +1,5 @@
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -9,12 +9,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "**",
       },
     ],
     unoptimized: true,
   },
-}
+  output: "standalone",
+};
 
-export default nextConfig
+export default nextConfig;
