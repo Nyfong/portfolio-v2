@@ -16,6 +16,7 @@ import {
 import { IconCloudDemo } from "@/components/icon-cloud-demo";
 import { GitHubCalendarComponent } from "@/components/github-calendar";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import { ResumePreview } from "@/components/resume-preview";
 import Image from "next/image";
 
 export const metadata = {
@@ -300,6 +301,9 @@ export default function AboutPage() {
             </Card>
           </div>
         </section>
+
+        {/* Resume Preview */}
+        <ResumePreview />
 
         {/* Experience */}
         <section className="space-y-12 hidden">

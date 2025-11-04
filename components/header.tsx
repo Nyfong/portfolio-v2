@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { Button } from "./ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -52,6 +52,17 @@ export function Header() {
               </li>
             ))}
           </ul>
+          <Button
+            variant="outline"
+            size="sm"
+            asChild
+            className="gap-2"
+          >
+            <a href="/nyfong-resume.pdf" download>
+              <Download className="h-4 w-4" />
+              Download CV
+            </a>
+          </Button>
           <AnimatedThemeToggler className="h-9 w-9 rounded-full border border-border bg-background hover:bg-muted transition-colors" />
         </div>
 
@@ -95,6 +106,19 @@ export function Header() {
                 </li>
               ))}
             </ul>
+            <div className="mt-4 px-4">
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className="w-full gap-2"
+              >
+                <a href="/nyfong-resume.pdf" download>
+                  <Download className="h-4 w-4" />
+                  Download CV
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       )}
