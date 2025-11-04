@@ -125,6 +125,9 @@ importers:
       react-github-calendar:
         specifier: ^3.0.8
         version: 3.4.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react-icons:
+        specifier: ^5.5.0
+        version: 5.5.0(react@19.2.0)
       rehype-autolink-headings:
         specifier: ^7.0.0
         version: 7.1.0
@@ -2077,6 +2080,11 @@ packages:
     peerDependenciesMeta:
       react-tooltip:
         optional: true
+
+  react-icons@5.5.0:
+    resolution: {integrity: sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw==}
+    peerDependencies:
+      react: '*'
 
   react-is@16.8.6:
     resolution: {integrity: sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==}
@@ -4584,6 +4592,10 @@ snapshots:
       react: 19.2.0
       react-activity-calendar: 1.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-dom: 19.2.0(react@19.2.0)
+
+  react-icons@5.5.0(react@19.2.0):
+    dependencies:
+      react: 19.2.0
 
   react-is@16.8.6: {}
 
