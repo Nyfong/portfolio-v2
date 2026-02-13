@@ -7,8 +7,7 @@ Switch between website layouts via `NEXT_PUBLIC_APP_VERSION` env var.
 
 ## To switch layout
 
-1. **Use v1** (default): Don't set the env var, or set `NEXT_PUBLIC_APP_VERSION=1`
-2. **Use v2**: Set `NEXT_PUBLIC_APP_VERSION=2` in `.env.local` or your deploy env
-3. Redeploy
+- **Vercel (production)**: Always uses v1. No env needed.
+- **Local**: Use v1 by default. To use v2 locally, set `NEXT_PUBLIC_APP_VERSION=2` in `.env.local` and restart the dev server.
 
 Page content stays the same; only the layout shell (header, footer, wrapper) changes.
