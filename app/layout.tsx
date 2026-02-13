@@ -111,11 +111,12 @@ export default function RootLayout({
           storageKey="portfolio-theme"
           forceTheme={isV2 ? "dark" : undefined}
         >
-          {getAppVersion() === "2" ? (
+          {/* {getAppVersion() === "2" ? (
             <V2LayoutShell />
           ) : (
             <V1LayoutShell>{children}</V1LayoutShell>
-          )}
+          )} */}
+           <V2LayoutShell />
         </ThemeProvider>
       </body>
     </html>

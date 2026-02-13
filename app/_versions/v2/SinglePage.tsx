@@ -75,7 +75,7 @@ const selectedWorkRaw = [
     ],
     bullets: [
       "Backend: Building API using Python FastAPI and LLM Ollama for AI-powered penetration testing for black box and enhancement tools for white box and black box testing",
-      "Setting up Proxy using Nginx and Certbot for certificate", "Setting Autorization and Authentication with Keycloak",
+      "Setting up Proxy using Nginx and Certbot for certificate", "Setting Autorization and Authentication with Keycloa",
       "Setting DNS with Hostinger",
       "Using Git and GitHub for teamwork, collaboration, and source code tracking",
       "Frontend: Next.js, fetching API, and designing reusable components",
