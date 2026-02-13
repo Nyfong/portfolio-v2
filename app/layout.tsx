@@ -1,13 +1,17 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/lib/theme-provider";
+import { getAppVersion } from "@/lib/app-version";
+import { V1LayoutShell } from "./_versions/v1/LayoutShell";
+import { V2LayoutShell } from "./_versions/v2/LayoutShell";
 
-const inter = Inter({ subsets: ["latin"] });
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
+const poppins = localFont({
+  src: "../components/fonts/Poppins-Light.ttf",
+  variable: "--font-poppins",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -75,9 +79,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isV2 = getAppVersion() === "2";
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={isV2 ? "dark" : undefined}
+      style={isV2 ? { backgroundColor: "#0a0a0a" } : undefined}
+      suppressHydrationWarning
+    >
       <head>
+        {isV2 && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `document.documentElement.classList.add('dark');`,
+            }}
+          />
+        )}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
           rel="icon"
@@ -87,11 +105,17 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className}>
-        <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-          <Header />
-          <main>{children}</main>
-          <Footer />
+      <body className={`${poppins.className} antialiased`}>
+        <ThemeProvider
+          defaultTheme="dark"
+          storageKey="portfolio-theme"
+          forceTheme={isV2 ? "dark" : undefined}
+        >
+          {getAppVersion() === "2" ? (
+            <V2LayoutShell />
+          ) : (
+            <V1LayoutShell>{children}</V1LayoutShell>
+          )}
         </ThemeProvider>
       </body>
     </html>
