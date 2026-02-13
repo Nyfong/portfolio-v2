@@ -1,8 +1,6 @@
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  transpilePackages: ["next-mdx-remote"],
   typescript: {
     ignoreBuildErrors: true,
   },
