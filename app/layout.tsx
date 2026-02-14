@@ -15,7 +15,7 @@ const poppins = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ny Fong - Designer & Developer",
+    default: "Ny Fong - Cybersecurity Engineer & Developer",
     template: "%s | Your Name",
   },
   description:

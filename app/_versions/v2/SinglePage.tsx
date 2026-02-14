@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sections = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
+  { id: "projects", label: "Experiences" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -59,6 +60,10 @@ const hardSkills = [
   "Docker",
   "Nginx",
   "Keycloak",
+  "k6",
+  "Grafana",
+  "Locust",
+  "Trivy",
 ];
 
 const selectedWorkRaw = [
@@ -66,9 +71,9 @@ const selectedWorkRaw = [
     type: "project",
     date: "Oct 2025 – Dec 2025",
     sortDate: new Date(2025, 11, 1), // Dec 2025
-    title: "AI-powered Penetration Testing Tool",
+    title: "Backend Developer",
     description:
-      "Implemented based on black box and white box concepts, integrated with SAST tool.",
+      "AI-powered Penetration Testing Tool, Implemented based on black box and white box concepts, integrated with SAST tool.",
     badges: [
       "SAST (Static Application Security Testing)",
       "DAST (Dynamic Application Security Testing)",
@@ -86,14 +91,16 @@ const selectedWorkRaw = [
     type: "project",
     date: "Jun 2025 – Sep 2025",
     sortDate: new Date(2025, 8, 1), // Sep 2025
-    title: "Service Provider Comparison Platform",
+    title: "Frontend Developer & Team Leader",
     role: "Frontend Developer & Team Leader",
     description:
-      "A platform that helps users make informed decisions by allowing them to explore and compare various service providers. It also supports providers by offering a space to showcase their skills, services, and credentials to potential customers.",
+      "Service Provider Comparison Platform, A platform that helps users make informed decisions by allowing them to explore and compare various service providers. It also supports providers by offering a space to showcase their skills, services, and credentials to potential customers.",
     bullets: [
       "Using Git and GitHub for teamwork, collaboration, and source code tracking",
       "Design and mockup User Interface efficiently using Figma",
       "Frontend using React.js, fetching API, and designing reusable components with Flowbite, ShadCn and HeroUI for style guides",
+      "Lead team and deliver efficient work and smooth team collaboration",
+      "Propose and guide modern Frontend technology",
     ],
     logo: "/screen-0.png",
   },
@@ -107,7 +114,14 @@ const selectedWorkRaw = [
     org: "General Secretariat for the National Social Protection Council",
     description:
       "Full-time role focused on application security, software quality, and reliable system development.",
-    logo: "/spr1.png",
+    bullets: [
+      "Code analysis and static/dynamic security scanning",
+      "Unit testing and test automation",
+      "Stress testing and load testing",
+      "VAPT (Vulnerability Assessment and Penetration Testing)",
+      "Cyber governance and ISO compliance",
+    ],
+    logo: "/logo-gsnspc.png",
   },
 ];
 
@@ -117,12 +131,22 @@ const selectedWork = [...selectedWorkRaw].sort((a, b) => {
   return (dateB as Date).getTime() - (dateA as Date).getTime();
 });
 
+const SCROLL_TOP_THRESHOLD = 400;
+
 export function V2SinglePage() {
   const [skillsExpanded, setSkillsExpanded] = useState(true);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
     document.documentElement.classList.remove("light");
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setShowBackToTop(window.scrollY > SCROLL_TOP_THRESHOLD);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollTo = (id: string) => {
@@ -175,7 +199,7 @@ export function V2SinglePage() {
           id="hero"
           className="min-h-[85vh] flex flex-col lg:flex-row lg:items-center lg:gap-16 justify-center py-24"
         >
-          <div className="flex-1">
+          <div className="flex-1 order-2 lg:order-none">
             <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4">
               Designer & Developer
             </p>
@@ -220,7 +244,7 @@ export function V2SinglePage() {
             </Button>
           </div>
           </div>
-          <div className="shrink-0 mt-12 lg:mt-0 flex justify-center lg:justify-start">
+          <div className="shrink-0 order-1 lg:order-none mt-0 mb-8 lg:mb-0 lg:mt-0 flex justify-center lg:justify-start">
             <Image
               src="/fong-image.png"
               alt="Ny Fong"
@@ -349,10 +373,10 @@ export function V2SinglePage() {
             {selectedWork.map((item, i) => (
               <div
                 key={i}
-                className="group flex flex-col sm:flex-row gap-6 p-6 rounded-2xl border border-border/50 bg-muted/20 hover:bg-muted/30 transition-colors"
+                className="group flex flex-col sm:flex-row gap-6 p-6 rounded-2xl border border-border/50 bg-muted/20 transition-all duration-200 hover:bg-muted/40 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 cursor-default"
               >
                 <div className="shrink-0">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-background/80 border border-border/50 flex items-center justify-center">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-background/80 border border-border/50 flex items-center justify-center transition-all duration-200 group-hover:border-primary/40 group-hover:ring-2 group-hover:ring-primary/10">
                     <Image
                       src={item.logo}
                       alt=""
@@ -431,6 +455,18 @@ export function V2SinglePage() {
           </p>
         </footer>
       </main>
+
+      {/* Back to top */}
+      {showBackToTop && (
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+        >
+          <ChevronUp className="w-5 h-5" />
+        </button>
+      )}
     </div>
   );
 }
