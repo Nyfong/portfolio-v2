@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 const sections = [
@@ -136,6 +137,9 @@ const SCROLL_TOP_THRESHOLD = 400;
 export function V2SinglePage() {
   const [skillsExpanded, setSkillsExpanded] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [workPage, setWorkPage] = useState(0);
+  const [workDirection, setWorkDirection] = useState(0);
+  const [workViewMode, setWorkViewMode] = useState<"pages" | "scroll">("scroll");
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -157,7 +161,7 @@ export function V2SinglePage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Minimal nav */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-        <nav className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+        <nav className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
           <button
             onClick={() => scrollTo("hero")}
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
@@ -193,11 +197,11 @@ export function V2SinglePage() {
         </nav>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 pt-14">
+      <main className="max-w-4xl mx-auto px-4 pt-12">
         {/* Hero */}
         <section
           id="hero"
-          className="min-h-[85vh] flex flex-col lg:flex-row lg:items-center lg:gap-16 justify-center py-24"
+          className="min-h-[80vh] flex flex-col lg:flex-row lg:items-center lg:gap-12 justify-center py-14"
         >
           <div className="flex-1 order-2 lg:order-none">
             <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4">
@@ -210,7 +214,7 @@ export function V2SinglePage() {
               Full-stack developer crafting beautiful, performant web
               applications. Available for new projects.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-full">
                 <a href="mailto:litongfong12@gmail.com">Get in touch</a>
               </Button>
@@ -244,7 +248,7 @@ export function V2SinglePage() {
               </Button>
             </div>
           </div>
-          <div className="shrink-0 order-1 lg:order-none mt-0 mb-8 lg:mb-0 flex justify-center lg:justify-end">
+          <div className="shrink-0 order-1 lg:order-none mt-0 mb-6 lg:mb-0 flex justify-center lg:justify-end">
             <Image
               src="/fong-image.png"
               alt="Ny Fong"
@@ -257,12 +261,12 @@ export function V2SinglePage() {
         </section>
 
         {/* QR – Open for remote work (full size) */}
-        <section className="py-12 border-t border-border/50">
+        <section className="py-10 border-t border-border/50">
           <a
             href="https://www.linkedin.com/in/ny-fong-5b1ab528a/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-4 w-full p-6 rounded-2xl border-2 border-border/50 bg-white dark:bg-muted/40 hover:border-primary/50 transition-all duration-200"
+            className="flex flex-col items-center gap-4 w-full p-4 rounded-2xl border-2 border-border/50 bg-white dark:bg-muted/40 hover:border-primary/50 transition-all duration-200"
           >
             <Image
               src="/openfoorwork.jpeg"
@@ -278,51 +282,60 @@ export function V2SinglePage() {
         {/* About */}
         <section
           id="about"
-          className="py-24 border-t border-border/50 scroll-mt-20"
+          className="py-14 border-t border-border/50 scroll-mt-20"
         >
-          <h2 className="text-2xl font-semibold mb-6">About</h2>
-          <div className="space-y-4 text-muted-foreground max-w-2xl">
-            <p className="text-lg leading-relaxed">
-              Full-stack developer with 3+ years of experience building modern
-              web applications. I focus on clean code, performance, and creating
-              intuitive user experiences.
-            </p>
-            <p className="leading-relaxed">
-              From startups to established products, I bring ideas to life with
-              React, Next.js, TypeScript, and modern tooling.
-            </p>
-          </div>
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {["2+ Years", "10+ Projects", "20+ Technologies"].map((stat) => (
-              <div
-                key={stat}
-                className="text-center p-4 rounded-lg border border-border/50 bg-card/50"
-              >
-                <span className="text-lg font-medium text-foreground">
-                  {stat.split(" ")[0]}
-                </span>
-                <span className="text-sm text-muted-foreground block mt-0.5">
-                  {stat.split(" ").slice(1).join(" ")}
-                </span>
+          <h2 className="text-2xl font-semibold mb-4">About</h2>
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
+            <div className="flex-1 min-w-0 space-y-4 text-muted-foreground max-w-2xl">
+              <p className="text-lg leading-relaxed">
+                Full-stack developer with 3+ years of experience building modern
+                web applications. I focus on clean code, performance, and creating
+                intuitive user experiences.
+              </p>
+              <p className="leading-relaxed">
+                From startups to established products, I bring ideas to life with
+                React, Next.js, TypeScript, and modern tooling.
+              </p>
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {["3+ Years", "10+ Projects", "20+ Technologies"].map((stat) => (
+                  <div
+                    key={stat}
+                    className="text-center p-4 rounded-lg border border-border/50 bg-card/50"
+                  >
+                    <span className="text-lg font-medium text-foreground">
+                      {stat.split(" ")[0]}
+                    </span>
+                    <span className="text-sm text-muted-foreground block mt-0.5">
+                      {stat.split(" ").slice(1).join(" ")}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="shrink-0 w-full lg:w-auto lg:max-w-xs">
+              <img
+                src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeHE4cDdiOGt6MGZuZHFzc2s0Y3o4eDNzemxtM2F0NjFqZjM0bTNhNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ZVik7pBtu9dNS/source.gif"
+                alt=""
+                className="rounded-xl border border-border/50 w-full max-w-[240px] mx-auto lg:mx-0"
+              />
+            </div>
           </div>
         </section>
 
         {/* Hard Skills */}
         <section
           id="skills"
-          className="py-24 border-t border-border/50 scroll-mt-20"
+          className="py-14 border-t border-border/50 scroll-mt-20"
         >
           <div className="rounded-2xl border border-border/40 bg-card/20 overflow-hidden">
             <button
               type="button"
               onClick={() => setSkillsExpanded((p) => !p)}
-              className="w-full text-left group flex items-center justify-between gap-4 p-6 hover:bg-muted/20 transition-colors duration-200"
+              className="w-full text-left group flex items-center justify-between gap-4 p-4 hover:bg-muted/20 transition-colors duration-200"
             >
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <span className="text-lg font-semibold text-primary">
+                <div className="min-w-[2.25rem] h-9 sm:min-w-10 sm:h-10 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center px-1.5 group-hover:bg-primary/20 transition-colors shrink-0">
+                  <span className="text-sm sm:text-lg font-semibold text-primary tabular-nums">
                     {hardSkills.length}
                   </span>
                 </div>
@@ -363,8 +376,8 @@ export function V2SinglePage() {
               }`}
             >
               <div className="min-h-0 overflow-hidden">
-                <div className="px-6 pb-6 pt-0">
-                  <div className="rounded-xl bg-muted/20 dark:bg-muted/5 p-6 border border-border/30">
+                <div className="px-4 pb-4 pt-0">
+                  <div className="rounded-xl bg-muted/20 dark:bg-muted/5 p-4 border border-border/30">
                     <div className="flex flex-wrap gap-2">
                       {hardSkills.map((skill) => (
                         <span
@@ -385,81 +398,222 @@ export function V2SinglePage() {
         {/* Selected Work */}
         <section
           id="projects"
-          className="py-24 border-t border-border/50 scroll-mt-20"
+          className="py-14 border-t border-border/50 scroll-mt-20"
         >
-          <h2 className="text-2xl font-semibold mb-6">Work Experiences</h2>
-          <div className="space-y-8">
-            {selectedWork.map((item, i) => (
-              <div
-                key={i}
-                className="group flex flex-col sm:flex-row gap-6 p-6 rounded-2xl border border-border/50 bg-muted/20 transition-all duration-200 hover:bg-muted/40 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 cursor-default"
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+            <h2 className="text-2xl font-semibold">Work Experiences</h2>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground mr-1 hidden sm:inline">Layout:</span>
+              <button
+                type="button"
+                onClick={() => setWorkViewMode("pages")}
+                aria-label="Pages"
+                className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                  workViewMode === "pages"
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "border-border/50 hover:bg-muted/30"
+                }`}
               >
-                <div className="shrink-0">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-background/80 border border-border/50 flex items-center justify-center transition-all duration-200 group-hover:border-primary/40 group-hover:ring-2 group-hover:ring-primary/10">
-                    <Image
-                      src={item.logo}
-                      alt=""
-                      width={80}
-                      height={80}
-                      className="w-full h-full object-contain p-1"
-                    />
+                Pages
+              </button>
+              <button
+                type="button"
+                onClick={() => setWorkViewMode("scroll")}
+                aria-label="Scroll"
+                className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                  workViewMode === "scroll"
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "border-border/50 hover:bg-muted/30"
+                }`}
+              >
+                Scroll
+              </button>
+              {workViewMode === "pages" && (
+                <>
+                  <span className="w-px h-5 bg-border/50 mx-1" />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWorkDirection(-1);
+                      setWorkPage((p) => Math.max(0, p - 1));
+                    }}
+                    disabled={workPage === 0}
+                    aria-label="Previous"
+                    className="p-2 rounded-lg border border-border/50 hover:bg-muted/30 disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <span className="text-sm text-muted-foreground min-w-16 text-center">
+                    {workPage + 1} / {Math.max(1, Math.ceil(selectedWork.length / 2))}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWorkDirection(1);
+                      const maxPage = Math.max(0, Math.ceil(selectedWork.length / 2) - 1);
+                      setWorkPage((p) => Math.min(maxPage, p + 1));
+                    }}
+                    disabled={workPage >= Math.ceil(selectedWork.length / 2) - 1}
+                    aria-label="Next"
+                    className="p-2 rounded-lg border border-border/50 hover:bg-muted/30 disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+          {workViewMode === "scroll" ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {selectedWork.map((item, i) => (
+                <div
+                  key={i}
+                  className="group flex flex-col gap-4 p-4 rounded-2xl border border-border/50 bg-muted/20 transition-all duration-200 hover:bg-muted/40 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 cursor-default"
+                >
+                  <div className="shrink-0 flex justify-start">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-background/80 border border-border/50 flex items-center justify-center transition-all duration-200 group-hover:border-primary/40 group-hover:ring-2 group-hover:ring-primary/10">
+                      <Image
+                        src={item.logo}
+                        alt=""
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-contain p-1"
+                      />
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {"date" in item
+                        ? item.date
+                        : (() => {
+                            const mos = Math.max(0, item.durationMonths());
+                            return `${item.dateStart} – ${item.dateEnd} · ${mos} ${mos === 1 ? "mo" : "mos"}`;
+                          })()}
+                    </p>
+                    <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
+                      {item.title}
+                    </h3>
+                    {(item.org || ("role" in item && item.role)) && (
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        {item.org ?? ("role" in item ? item.role : "")}
+                      </p>
+                    )}
+                    <p className="mt-2 text-muted-foreground text-sm">
+                      {item.description}
+                    </p>
+                    {item.badges && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {item.badges.map((badge) => (
+                          <span
+                            key={badge}
+                            className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                          >
+                            {badge}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {item.bullets && (
+                      <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
+                        {item.bullets.map((bullet) => (
+                          <li key={bullet} className="flex gap-2">
+                            <span className="text-primary mt-0.5">●</span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-muted-foreground mb-1">
-                    {"date" in item
-                      ? item.date
-                      : (() => {
-                          const mos = Math.max(0, item.durationMonths());
-                          return `${item.dateStart} – ${item.dateEnd} · ${mos} ${mos === 1 ? "mo" : "mos"}`;
-                        })()}
-                  </p>
-                  <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  {(item.org || ("role" in item && item.role)) && (
-                    <p className="text-sm text-muted-foreground mt-0.5">
-                      {item.org ?? ("role" in item ? item.role : "")}
-                    </p>
-                  )}
-                  <p className="mt-2 text-muted-foreground text-sm">
-                    {item.description}
-                  </p>
-                  {item.badges && (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {item.badges.map((badge) => (
-                        <span
-                          key={badge}
-                          className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
-                        >
-                          {badge}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  {item.bullets && (
-                    <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
-                      {item.bullets.map((bullet) => (
-                        <li key={bullet} className="flex gap-2">
-                          <span className="text-primary mt-0.5">●</span>
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="relative overflow-hidden min-h-[320px]">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={workPage}
+                  initial={{ opacity: 0, x: workDirection === 1 ? 24 : -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: workDirection === 1 ? -24 : 24 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
+                  {selectedWork
+                    .slice(workPage * 2, workPage * 2 + 2)
+                    .map((item, i) => (
+                      <div
+                        key={workPage * 2 + i}
+                        className="group flex flex-col gap-4 p-4 rounded-2xl border border-border/50 bg-muted/20 transition-all duration-200 hover:bg-muted/40 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 cursor-default"
+                      >
+                        <div className="shrink-0 flex justify-start">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-background/80 border border-border/50 flex items-center justify-center transition-all duration-200 group-hover:border-primary/40 group-hover:ring-2 group-hover:ring-primary/10">
+                            <Image
+                              src={item.logo}
+                              alt=""
+                              width={80}
+                              height={80}
+                              className="w-full h-full object-contain p-1"
+                            />
+                          </div>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm text-muted-foreground mb-1">
+                            {"date" in item
+                              ? item.date
+                              : (() => {
+                                  const mos = Math.max(0, item.durationMonths());
+                                  return `${item.dateStart} – ${item.dateEnd} · ${mos} ${mos === 1 ? "mo" : "mos"}`;
+                                })()}
+                          </p>
+                          <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
+                            {item.title}
+                          </h3>
+                          {(item.org || ("role" in item && item.role)) && (
+                            <p className="text-sm text-muted-foreground mt-0.5">
+                              {item.org ?? ("role" in item ? item.role : "")}
+                            </p>
+                          )}
+                          <p className="mt-2 text-muted-foreground text-sm">
+                            {item.description}
+                          </p>
+                          {item.badges && (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {item.badges.map((badge) => (
+                                <span
+                                  key={badge}
+                                  className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                                >
+                                  {badge}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          {item.bullets && (
+                            <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
+                              {item.bullets.map((bullet) => (
+                                <li key={bullet} className="flex gap-2">
+                                  <span className="text-primary mt-0.5">●</span>
+                                  <span>{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          )}
         </section>
 
         {/* Contact */}
         <section
           id="contact"
-          className="py-24 border-t border-border/50 scroll-mt-20"
+          className="py-14 border-t border-border/50 scroll-mt-20"
         >
-          <h2 className="text-2xl font-semibold mb-6">Contact</h2>
-          <p className="text-muted-foreground max-w-xl mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Contact</h2>
+          <p className="text-muted-foreground max-w-xl mb-6">
             Open to new opportunities and collaborations. Reach out anytime.
           </p>
           <Button asChild size="lg" className="rounded-full">
@@ -468,7 +622,7 @@ export function V2SinglePage() {
         </section>
 
         {/* Footer */}
-        <footer className="py-12 border-t border-border/50">
+        <footer className="py-8 border-t border-border/50">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Ny Fong
           </p>
