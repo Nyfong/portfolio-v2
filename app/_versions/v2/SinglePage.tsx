@@ -211,49 +211,68 @@ export function V2SinglePage() {
               applications. Available for new projects.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-            <Button asChild size="lg" className="rounded-full">
-              <a href="mailto:litongfong12@gmail.com">Get in touch</a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full">
-              <a href={cvUrl} target="_blank" rel="noopener noreferrer">
-                View CV
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full">
-              <a href={cvUrl} download="CV-NY-FONG.pdf">
-                Download CV
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="rounded-full">
-              <a
-                href="https://github.com/Nyfong"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="rounded-full">
-              <a
-                href="https://www.linkedin.com/in/ny-fong-5b1ab528a/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-            </Button>
+              <Button asChild size="lg" className="rounded-full">
+                <a href="mailto:litongfong12@gmail.com">Get in touch</a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full">
+                <a href={cvUrl} target="_blank" rel="noopener noreferrer">
+                  View CV
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full">
+                <a href={cvUrl} download="CV-NY-FONG.pdf">
+                  Download CV
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full">
+                <a
+                  href="https://github.com/Nyfong"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full">
+                <a
+                  href="https://www.linkedin.com/in/ny-fong-5b1ab528a/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </Button>
+            </div>
           </div>
-          </div>
-          <div className="shrink-0 order-1 lg:order-none mt-0 mb-8 lg:mb-0 lg:mt-0 flex justify-center lg:justify-start">
+          <div className="shrink-0 order-1 lg:order-none mt-0 mb-8 lg:mb-0 flex justify-center lg:justify-end">
             <Image
               src="/fong-image.png"
               alt="Ny Fong"
               width={400}
               height={400}
-              className="rounded-2xl object-cover aspect-square w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96"
+              className="rounded-full object-cover aspect-square w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56"
               priority
             />
           </div>
+        </section>
+
+        {/* QR – Open for remote work (full size) */}
+        <section className="py-12 border-t border-border/50">
+          <a
+            href="https://www.linkedin.com/in/ny-fong-5b1ab528a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center gap-4 w-full p-6 rounded-2xl border-2 border-border/50 bg-white dark:bg-muted/40 hover:border-primary/50 transition-all duration-200"
+          >
+            <Image
+              src="/openfoorwork.jpeg"
+              alt="QR code – Open for remote work (LinkedIn)"
+              width={480}
+              height={480}
+              className="rounded-lg object-contain w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] aspect-square"
+            />
+            <span className="text-lg font-semibold text-center">Open for remote work</span>
+          </a>
         </section>
 
         {/* About */}
@@ -264,7 +283,7 @@ export function V2SinglePage() {
           <h2 className="text-2xl font-semibold mb-6">About</h2>
           <div className="space-y-4 text-muted-foreground max-w-2xl">
             <p className="text-lg leading-relaxed">
-              Full-stack developer with 2+ years of experience building modern
+              Full-stack developer with 3+ years of experience building modern
               web applications. I focus on clean code, performance, and creating
               intuitive user experiences.
             </p>
