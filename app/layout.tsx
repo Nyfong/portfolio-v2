@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { getAppVersion } from "@/lib/app-version";
@@ -10,6 +11,12 @@ import { V2LayoutShell } from "./_versions/v2/LayoutShell";
 const poppins = localFont({
   src: "../components/fonts/Poppins-Light.ttf",
   variable: "--font-poppins",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -105,7 +112,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${poppins.className} antialiased`}>
+      <body className={`${poppins.className} ${jetbrainsMono.variable} antialiased`}>
         <ThemeProvider
           defaultTheme="dark"
           storageKey="portfolio-theme"
