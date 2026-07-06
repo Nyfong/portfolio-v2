@@ -1,15 +1,13 @@
 import type React from "react";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { JetBrains_Mono } from "next/font/google";
+import { Poppins, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
-import { getAppVersion } from "@/lib/app-version";
-import { V1LayoutShell } from "./_versions/v1/LayoutShell";
 import { V2LayoutShell } from "./_versions/v2/LayoutShell";
 
-const poppins = localFont({
-  src: "../components/fonts/Poppins-Light.ttf",
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-poppins",
   display: "swap",
 });
@@ -86,23 +84,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isV2 = getAppVersion() === "2";
-
   return (
     <html
       lang="en"
-      className={isV2 ? "dark" : undefined}
-      style={isV2 ? { backgroundColor: "#0a0a0a" } : undefined}
+      className="light"
+      style={{ backgroundColor: "#ffffff" }}
       suppressHydrationWarning
     >
       <head>
-        {isV2 && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `document.documentElement.classList.add('dark');`,
-            }}
-          />
-        )}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
           rel="icon"
@@ -112,18 +101,16 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${poppins.className} ${jetbrainsMono.variable} antialiased`}>
+      <body
+        className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        style={{ backgroundColor: "#ffffff", color: "#0f1115" }}
+      >
         <ThemeProvider
-          defaultTheme="dark"
+          defaultTheme="light"
           storageKey="portfolio-theme"
-          forceTheme={isV2 ? "dark" : undefined}
+          forceTheme="light"
         >
-          {/* {getAppVersion() === "2" ? (
-            <V2LayoutShell />
-          ) : (
-            <V1LayoutShell>{children}</V1LayoutShell>
-          )} */}
-           <V2LayoutShell />
+          <V2LayoutShell />
         </ThemeProvider>
       </body>
     </html>
