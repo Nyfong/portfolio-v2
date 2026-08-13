@@ -56,6 +56,35 @@
   --sidebar-accent-foreground: #d6f5e3;
   --sidebar-border: #1d3326;
   --sidebar-ring: #00ff9f;
+
+  /* Semantic page tokens — fallback copy of the light theme so nothing is
+     undefined before the theme class lands on <html>. */
+  --surface: #ffffff;
+  --surface-2: #fafafa;
+  --surface-3: #ffffff;
+  --line: #f0f0f2;
+  --line-strong: #ececef;
+  --ink: #0f1115;
+  --ink-2: #56565f;
+  --ink-3: #6b6b76;
+  --ink-4: #8a8a93;
+  --ink-5: #c8c8d0;
+  --brand: #4f46e5;
+  --brand-soft: #f2f1ff;
+  --solid: #111114;
+  --solid-hover: #2a2a30;
+  --solid-fg: #ffffff;
+  --chip: #f5f5f6;
+
+  /* Contact slab — inverted in light, merely elevated in dark. */
+  --contact-bg: #0f1115;
+  --contact-ink: #ffffff;
+  --contact-ink-2: rgba(255, 255, 255, 0.55);
+  --contact-line: rgba(255, 255, 255, 0.2);
+  --contact-field: rgba(255, 255, 255, 0.06);
+  --contact-btn: #ffffff;
+  --contact-btn-fg: #0f1115;
+  --contact-accent: #a5b4fc;
 }
 
 .dark {
@@ -91,6 +120,33 @@
   --sidebar-accent-foreground: #d6f5e3;
   --sidebar-border: #1d3326;
   --sidebar-ring: #00ff9f;
+
+  /* Semantic page tokens — cyber terminal: matrix green on near-black. */
+  --surface: #070a09;
+  --surface-2: #0a0e0c;
+  --surface-3: #0b100e;
+  --line: #16241d;
+  --line-strong: #1e3327;
+  --ink: #e6fff5;
+  --ink-2: #a3cbb7;
+  --ink-3: #82ad97;
+  --ink-4: #6f9a85;
+  --ink-5: #3f5c4e;
+  --brand: #00ff9f;
+  --brand-soft: #0c1f17;
+  --solid: #00ff9f;
+  --solid-hover: #4dffbb;
+  --solid-fg: #04140c;
+  --chip: #101815;
+
+  --contact-bg: #050807;
+  --contact-ink: #e6fff5;
+  --contact-ink-2: #82ad97;
+  --contact-line: #1e3327;
+  --contact-field: rgba(0, 255, 159, 0.05);
+  --contact-btn: #00ff9f;
+  --contact-btn-fg: #04140c;
+  --contact-accent: #00ff9f;
 }
 
 @theme inline {
@@ -116,6 +172,33 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  /* Semantic page tokens -> Tailwind utilities (bg-surface, text-ink, …) */
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-ink-5: var(--ink-5);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-solid: var(--solid);
+  --color-solid-hover: var(--solid-hover);
+  --color-solid-fg: var(--solid-fg);
+  --color-chip: var(--chip);
+  --color-contact-bg: var(--contact-bg);
+  --color-contact-ink: var(--contact-ink);
+  --color-contact-ink-2: var(--contact-ink-2);
+  --color-contact-line: var(--contact-line);
+  --color-contact-field: var(--contact-field);
+  --color-contact-btn: var(--contact-btn);
+  --color-contact-btn-fg: var(--contact-btn-fg);
+  --color-contact-accent: var(--contact-accent);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -173,6 +256,33 @@
   --border: #ececef;
   --input: #ececef;
   --ring: #4f46e5;
+
+  /* Semantic page tokens — modern minimal. */
+  --surface: #ffffff;
+  --surface-2: #fafafa;
+  --surface-3: #ffffff;
+  --line: #f0f0f2;
+  --line-strong: #ececef;
+  --ink: #0f1115;
+  --ink-2: #56565f;
+  --ink-3: #6b6b76;
+  --ink-4: #8a8a93;
+  --ink-5: #c8c8d0;
+  --brand: #4f46e5;
+  --brand-soft: #f2f1ff;
+  --solid: #111114;
+  --solid-hover: #2a2a30;
+  --solid-fg: #ffffff;
+  --chip: #f5f5f6;
+
+  --contact-bg: #0f1115;
+  --contact-ink: #ffffff;
+  --contact-ink-2: rgba(255, 255, 255, 0.55);
+  --contact-line: rgba(255, 255, 255, 0.2);
+  --contact-field: rgba(255, 255, 255, 0.06);
+  --contact-btn: #ffffff;
+  --contact-btn-fg: #0f1115;
+  --contact-accent: #a5b4fc;
 }
 
 * {
@@ -627,5 +737,158 @@ body {
   .animate-spin-slow-reverse,
   .animate-rise-in {
     animation: none;
+  }
+}
+
+/* ============================================
+   Theme switching + interaction polish
+   ============================================ */
+
+/* Smooth crossfade when toggling light <-> dark. Deliberately narrow:
+   transitioning `all` here would fight framer-motion transforms. */
+:root,
+.light,
+.dark {
+  --theme-ease: 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body,
+header,
+section,
+footer,
+[data-theme-surface] {
+  transition: background-color var(--theme-ease), border-color var(--theme-ease),
+    color var(--theme-ease);
+}
+
+/* Keyboard focus — one consistent, visible ring across both themes. */
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Animated underline for inline links. */
+.link-underline {
+  background-image: linear-gradient(var(--brand), var(--brand));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* Dark-only cyber trim: a faint scanning sheen along a section's top edge. */
+@keyframes edge-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.dark .edge-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .edge-scan::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--brand) 80%, transparent),
+    transparent
+  );
+  animation: edge-sweep 6s linear infinite;
+}
+
+/* Terminal caret used by the typewriter line. */
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.05em;
+  margin-left: 0.15em;
+  vertical-align: -0.15em;
+  background: var(--brand);
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  header,
+  section,
+  footer,
+  [data-theme-surface] {
+    transition: none;
+  }
+
+  .dark .edge-scan::before,
+  .caret::after {
+    animation: none;
+  }
+
+  .link-underline {
+    transition: none;
+  }
+}
+
+/* Faint dotted graph paper, faded out toward the edges. Used behind the hero
+   so the section has depth without competing with the headline. */
+.dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--line-strong) 1px,
+    transparent 0
+  );
+  background-size: 30px 30px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 0%,
+    #000 35%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 0%,
+    #000 35%,
+    transparent 100%
+  );
+}
+
+/* Soft brand wash anchored to a corner — pairs with .dot-grid in the hero. */
+.brand-bloom {
+  background: radial-gradient(
+    42rem 28rem at 78% 8%,
+    color-mix(in srgb, var(--brand) 10%, transparent),
+    transparent 70%
+  );
+}
+
+/* Shared card lift. Kept in CSS so every card animates identically. */
+.card-lift {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--brand) 35%, var(--line-strong));
+  box-shadow: 0 18px 44px -24px color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift,
+  .card-lift:hover {
+    transform: none;
+    transition: border-color 200ms ease;
   }
 }

@@ -85,13 +85,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className="light"
-      style={{ backgroundColor: "#ffffff" }}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Resolves the theme before first paint: a stored choice wins,
+            otherwise dark. Without this the page paints one theme and then
+            flips, which is worse than either theme. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var k='portfolio-theme';var s=localStorage.getItem(k);var t=(s==='dark'||s==='light')?s:'dark';var e=document.documentElement;e.classList.remove('light','dark');e.classList.add(t);e.style.colorScheme=t;}catch(err){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}})();`,
+          }}
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
           rel="icon"
@@ -103,13 +106,8 @@ export default function RootLayout({
       </head>
       <body
         className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-        style={{ backgroundColor: "#ffffff", color: "#0f1115" }}
       >
-        <ThemeProvider
-          defaultTheme="light"
-          storageKey="portfolio-theme"
-          forceTheme="light"
-        >
+        <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
           <V2LayoutShell />
         </ThemeProvider>
       </body>

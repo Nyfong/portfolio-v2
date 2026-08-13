@@ -30,7 +30,15 @@ export function ThemeProvider({
   forceTheme,
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = React.useState<Theme>(() => forceTheme ?? defaultTheme)
+  // The inline script in <head> has already resolved the theme and put the
+  // class on <html>, so read it back rather than guessing and re-painting.
+  const [theme, setTheme] = React.useState<Theme>(() => {
+    if (forceTheme) return forceTheme
+    if (typeof document !== "undefined") {
+      return document.documentElement.classList.contains("dark") ? "dark" : "light"
+    }
+    return defaultTheme
+  })
 
   React.useEffect(() => {
     if (forceTheme) {
@@ -38,15 +46,18 @@ export function ThemeProvider({
       return
     }
     const stored = localStorage.getItem(storageKey) as Theme | null
-    if (stored) {
+    if (stored === "dark" || stored === "light") {
       setTheme(stored)
     }
   }, [storageKey, forceTheme])
 
   React.useEffect(() => {
     const root = window.document.documentElement
+    const next = forceTheme ?? theme
     root.classList.remove("light", "dark")
-    root.classList.add(forceTheme ?? theme)
+    root.classList.add(next)
+    // Keeps native UI (scrollbars, form controls, autofill) in step.
+    root.style.colorScheme = next
     if (!forceTheme) {
       localStorage.setItem(storageKey, theme)
     }

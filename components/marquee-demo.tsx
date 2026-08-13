@@ -35,7 +35,7 @@ const reviews = [
   {
     name: "Contact Info",
     username: "Get in Touch",
-    body: "+855 96 46 299 53 | llitongfong12@gmail.com | Steung Meanchey, Phnom Penh | DOB: 25 May 2005",
+    body: "+855 96 46 299 53 | litongfong12@gmail.com | Steung Meanchey, Phnom Penh | DOB: 25 May 2005",
     img: "https://avatar.vercel.sh/contact",
   },
 ];
