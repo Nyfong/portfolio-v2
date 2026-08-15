@@ -1,11 +1,17 @@
 {
-  "name": "Your Name Portfolio",
-  "short_name": "Portfolio",
-  "description": "Portfolio of a designer and developer creating beautiful digital experiences",
+  "name": "Ny Fong — Cybersecurity Engineer & Developer",
+  "short_name": "Ny Fong",
+  "description": "Portfolio of Ny Fong (NyFong) — cybersecurity engineer and full-stack developer in Phnom Penh, Cambodia.",
   "icons": [
     {
-      "src": "/logo-web.png",
-      "sizes": "860x408",
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
@@ -14,8 +20,8 @@
       "type": "image/x-icon"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "theme_color": "#070a09",
+  "background_color": "#070a09",
   "display": "standalone",
   "start_url": "/"
 }

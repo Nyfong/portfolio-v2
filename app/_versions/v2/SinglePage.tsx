@@ -52,6 +52,11 @@ import {
   Flame,
   Sun,
   Moon,
+  Sparkles,
+  MousePointer2,
+  Bot,
+  Plug,
+  BrainCircuit,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -87,6 +92,8 @@ import {
   SiKeycloak,
   SiGrafana,
   SiUbuntu,
+  SiOllama,
+  SiClaude,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import type { IconType } from "react-icons";
@@ -207,6 +214,18 @@ const hardSkills = [
       "Forensics",
       "Attack Chaining",
       "Qualys",
+    ],
+  },
+  {
+    category: "AI & LLM",
+    skills: [
+      "Ollama",
+      "Qwen",
+      "Claude",
+      "Cursor",
+      "AI Agents",
+      "MCP Servers",
+      "RAG",
     ],
   },
   {
@@ -413,11 +432,14 @@ const awards: AwardItem[] = [
     images: ["/compi/hrd-coding-challenge-3rd.jpg"],
   },
   {
-    title: "Cyber Arena 2026",
-    issuer: "National Cybersecurity Competition · Team H1T, backup among 100+ teams",
-    badge: "Team H1T",
+    title: "Cambodia National Cybersecurity Competition 2026",
+    issuer: "Ministry of Post and Telecommunications",
+    badge: "Verified",
     year: "2026",
-    images: ["/compi/cyber-arena-2026.jpg"],
+    images: ["/compi/cyber-arena-2026-certificate.jpg"],
+    verifyUrl:
+      "https://verify.gov.kh/verify/FhRNCs1MM-4GOAK91o7aar6GUJfUJGyf?key=38fb2af1ce173b57c5d0ffc073ade1d8546120d531c65415c18dc5f2c36f9a5d",
+    fit: "contain",
   },
 ];
 
@@ -470,6 +492,8 @@ const skillIcons: Record<string, { icon: IconType; color: string }> = {
   Keycloak: { icon: SiKeycloak, color: "#008AAA" },
   Grafana: { icon: SiGrafana, color: "#F46800" },
   Ubuntu: { icon: SiUbuntu, color: "#E95420" },
+  Ollama: { icon: SiOllama, color: "var(--ink)" },
+  Claude: { icon: SiClaude, color: "#D97757" },
 };
 
 /* Tools/concepts with no official brand logo — represented by a fitting
@@ -492,6 +516,11 @@ const fallbackSkillIcons: Record<string, { icon: LucideIcon; color: string }> = 
   Prometheus: { icon: Flame, color: "#E6522C" },
   "Google Cloud": { icon: Cloud, color: "#4285F4" },
   "AWS EC2": { icon: Cloud, color: "#FF9900" },
+  Qwen: { icon: Sparkles, color: "#615CED" },
+  Cursor: { icon: MousePointer2, color: "var(--ink)" },
+  "AI Agents": { icon: Bot, color: "#0D9488" },
+  "MCP Servers": { icon: Plug, color: "#EA580C" },
+  RAG: { icon: BrainCircuit, color: "#9333EA" },
 };
 
 /* ------------------------------------------------------------------ */
