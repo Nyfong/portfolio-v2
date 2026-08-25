@@ -415,6 +415,15 @@ const awards: AwardItem[] = [
     fit: "contain",
   },
   {
+    title: "Certified Cybersecurity Foundations (CORE)",
+    issuer: "Hackviser",
+    badge: "Certified",
+    year: "2026",
+    images: ["/compi/fong-hackviser.webp"],
+    verifyUrl: "https://hackviser.com/verify?id=HV-CORE-HE152X0N",
+    fit: "contain",
+  },
+  {
     title: "Top Team Award",
     issuer: "Korea Software HRD Center · 13th Basic Course",
     badge: "Top 1",
@@ -432,11 +441,14 @@ const awards: AwardItem[] = [
     images: ["/compi/hrd-coding-challenge-3rd.jpg"],
   },
   {
-    title: "Cambodia National Cybersecurity Competition 2026",
+    title: "Cyber Arena & National Cybersecurity Competition",
     issuer: "Ministry of Post and Telecommunications",
     badge: "Verified",
     year: "2026",
-    images: ["/compi/cyber-arena-2026-certificate.jpg"],
+    images: [
+      "/compi/cyber-arena-2026-certificate.jpg",
+      "/compi/national_mptc_cncc.jpg",
+    ],
     verifyUrl:
       "https://verify.gov.kh/verify/FhRNCs1MM-4GOAK91o7aar6GUJfUJGyf?key=38fb2af1ce173b57c5d0ffc073ade1d8546120d531c65415c18dc5f2c36f9a5d",
     fit: "contain",
