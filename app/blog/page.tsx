@@ -40,7 +40,7 @@ export default function BlogPage() {
     blogPosts.forEach((post) => post.tags.forEach((tag) => tags.add(tag)));
     return Array.from(tags);
   }, []);
-
+  //testing
   // Filter and sort posts
   const filteredPosts = useMemo(() => {
     let filtered = blogPosts.filter((post) => {
